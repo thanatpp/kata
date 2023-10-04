@@ -10,7 +10,7 @@ describe("Frequency sorting", () => {
   });
 
   test("sorting with frequency", () => {
-    const actual = frequencySorting([3, 3, 4, 4, 4, 1, 2]);
+    const actual = frequencySorting([3, 4, 4, 1, 3, 2, 4]);
     expect(actual).toEqual([4, 4, 4, 3, 3, 1, 2]);
   });
 });
@@ -35,11 +35,6 @@ function freqCompare(
   return (a, b) => {
     const frqA = mapFreq.get(a) ?? 1;
     const frqB = mapFreq.get(b) ?? 1;
-    if (frqA > frqB) {
-      return a;
-    } else if (frqB > frqA) {
-      return b;
-    }
-    return a - b;
+    return frqB - frqA || a - b;
   };
 }
