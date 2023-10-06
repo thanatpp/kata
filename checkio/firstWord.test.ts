@@ -13,8 +13,28 @@ describe("First word", () => {
     const actual = firstWord("hey guy");
     expect(actual).toEqual("hey");
   });
+
+  test("when input is sentence and hanve space first", () => {
+    const actual = firstWord(" a hey guy");
+    expect(actual).toEqual("a");
+  });
+
+  test("when input is sentence include special character", () => {
+    const actual = firstWord("hi, hey guy");
+    const actual2 = firstWord("... a hey guy ...");
+    const actual3 = firstWord("hello.hello");
+
+    expect(actual).toEqual("hi");
+    expect(actual2).toEqual("a");
+    expect(actual3).toEqual("hello");
+  });
 });
 
 function firstWord(sentence: string): string {
-  return sentence.split(" ")[0];
+  const words = sentence
+    .replaceAll(",", " ")
+    .replaceAll(".", " ")
+    .trim()
+    .split(" ");
+  return words[0];
 }
