@@ -23,23 +23,22 @@ describe("Three words", () => {
 });
 
 function threeWords(text: string): boolean {
-  return is3ConsecutiveWords(text);
-}
+  const words = text.split(" ");
+  let isThreeWords = false;
 
-const is3ConsecutiveWords = (text: string): boolean => {
-  let numberConsecutiveWords = 0;
-  for (const s of text.split(" ")) {
-    if (numberConsecutiveWords === 3) {
+  for (let i = 0; i < words.length - 2; i++) {
+    if (
+      !isNumber(words[i]) &&
+      !isNumber(words[i + 1]) &&
+      !isNumber(words[i + 2])
+    ) {
+      isThreeWords = true;
       break;
     }
-    if (!isNumber(s)) {
-      numberConsecutiveWords++;
-      continue;
-    }
-    numberConsecutiveWords = 0;
   }
-  return numberConsecutiveWords >= 3;
-};
+
+  return isThreeWords;
+}
 
 const isNumber = (text: string): boolean => {
   return !Number.isNaN(Number(text));
